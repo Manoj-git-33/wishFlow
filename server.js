@@ -22,7 +22,9 @@ const emailApi = new SibApiV3Sdk.TransactionalEmailsApi();*/
 
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "*"
+}));
 app.use(express.json());
 app.use(express.static("public"));
 
@@ -222,3 +224,4 @@ app.get("/", (_, res) => {
 app.listen(3000, () =>
   console.log("WishFlow backend started on port 3000")
 );
+
