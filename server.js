@@ -34,9 +34,12 @@ const upload = multer({ dest: "uploads/" });
 
 /* Utils */
 const todayMMDD = () => {
-  const d = new Date();
-  return `${String(d.getMonth() + 1).padStart(2, "0")}-${String(
-    d.getDate()
+  const istDate = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+
+  return `${String(istDate.getMonth() + 1).padStart(2, "0")}-${String(
+    istDate.getDate()
   ).padStart(2, "0")}`;
 };
 
@@ -129,7 +132,10 @@ app.get("/api/birthdays/today", async (req, res) => {
 
     const entry = {
       date: today,
-      time: new Date().toLocaleTimeString(),
+      time: new Date().toLocaleTimeString("en-IN", {
+  timeZone: "Asia/Kolkata"
+}),
+,
       name: stu.name,
       phone: stu.phone,
       email: stu.email,
@@ -224,4 +230,5 @@ app.get("/", (_, res) => {
 app.listen(3000, () =>
   console.log("WishFlow backend started on port 3000")
 );
+
 
